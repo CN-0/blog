@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Blogger</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+                <a class="navbar-brand" href="#"><strong>BLOGGER</strong></a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/blogs">My Blogs <span class="sr-only">(current)</span></a></li>
+                <li><a href="/all_blogs">All Blogs</a></li>
+              </ul>
+              <div class="search-box b-search">
+                  <a href="/logout" id="logout">Logout</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="full">
+            <div class="container">
+                <div class="col-md-9">
+                    <div id="baldy">
+                        <div class="container">
+                            <div class="col-md-9">
+                                <h1 class="text-center colo">MY BLOGS</h1>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="col-md-9">
+                                <a href="/blogs/new"><button class="btn btn-primary">New Blog</button></a>
+                                {% for blog in blogs %}
+                                    <h3 id=><a class="text-capitalize" href="/posts/{{ blog._id }}">{{ blog.title }}</a><a id="delete" href="/delete/{{ blog._id }}"><img id="image" src="/static/images/close.png"></a></h3>
+                                    <p>{{ blog.description }}</p>
+                                    <hr>
+                                {% endfor %}
+                                <img src="/static/images/gen1.jpg" alt="image">
+                                <img src="/static/images/gen2.jpg" alt="image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="col-md-3">
+                        <div class="jumbotron jumbotronic text-center">
+                            <h2 class="text-center">Profile</h2><hr>
+                            <h4 class="text-center text-capitalize" id="mil">author: {{ session['email'] }}</h4>
+                            <h4 class="text-center"> Total no.of blogs: {{blogs|length}}</h4>
+                            <h4 class="text-center"> no.of posts: {{ postsno }}</h4><br>
+                            <a href="/edit_profile" class="btn btn-primary" onclick="mil()">Edit password</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/na.js') }}"></script>
+
+    </body>
+</html>
+

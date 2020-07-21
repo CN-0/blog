@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Blogger</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}"/>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#"><strong>BLOGGER</strong></a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+                <li><a href="/blogs">My Blogs</a></li>
+                <li class="active"><a href="/all_blogs">All Blogs <span class="sr-only">(current)</span></a></li>
+              </ul>
+              <div class="search-box b-search">
+                  <a href="/logout" id="logout">Logout</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <div class="full">
+            <div class="col-md-5"></div>
+            <div class="col-md-2">
+                <h1 class="text-center">ALL BLOGS</h1>
+            </div>
+            <div class="col-md-5">
+                <div class="searching">
+                    <form action="/search" method="post">
+                        <input name="q" id="q" type="text" required="" placeholder="  Search by Author">
+                        <button id="p" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"> </div>
+        <div class="full">
+            <div class="container">
+                {% for blog in blogs %}
+                <h3 class="text-capitalize"><a href="/all_posts/{{ blog._id }}">{{ blog.title }}</a></h3>
+                    <p>{{ blog.description }}</p>
+                    <p>author:{{ blog.author }}</p>
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    </body>
+</html>
+
